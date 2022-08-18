@@ -6,9 +6,13 @@
 
         <title>Henning.PARTY</title>
 
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <header class="shadow">
+        This is the header
+    </header>
 
     @auth
         <h1>Hello, {{ Auth::user()->name }}</h1>
