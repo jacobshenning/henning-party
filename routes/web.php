@@ -21,23 +21,26 @@ use Illuminate\Support\Str;
 */
 
 
-Route::get('/clear', function () {
-    Redis::flushall();
-
-
-    return redirect('/');
-});
-
 Route::get('/', function () {
-    $keys = Redis::keys('*');
+    if (! Auth::check()) {
+        return redirect('/login');
+    }
 
-    return view('welcome', compact('keys'));
+    return view('home');
 });
 
 Route::get('/logout', function () {
     Auth::logout();
 
     return redirect('/');
+});
+
+Route::get('/login', function() {
+    if (Auth::check()) {
+        return redirect('/');
+    }
+
+    return view('auth.login');
 });
 
 Route::post('/login', function() {
@@ -52,6 +55,14 @@ Route::post('/login', function() {
         ]);
     }
     return redirect('/');
+});
+
+Route::get('/register', function() {
+    if (Auth::check()) {
+        return redirect('/');
+    }
+
+    return view('auth.register');
 });
 
 Route::post('/register', function() {
