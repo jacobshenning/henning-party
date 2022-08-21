@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TestEvent;
 use App\Models\User;
 use App\Repos\UserRepo;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,14 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/broadcast', function () {
+
+    event(new TestEvent());
+
+    return 'Broadcasted';
+
+});
 
 
 Route::get('/', function () {
