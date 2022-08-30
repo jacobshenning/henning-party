@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
+use App\Broadcasting\PartyChannel;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,20 +17,36 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-//Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-//    return (int) $user->id === (int) $id;
-//});
-//
-//
-//Broadcast::channel('test', function () {
-//    return true;
-//});
-//
-//
-//Broadcast::channel('users', function ($user) {
-//    if($user->type == 'admin'){
-//        return $user;
-//    }else{
-//        return false;
+//Broadcast::channel('presence-game.party.id', function() {
+//    if (Auth::check() ) {
+//        return [
+//            'id' => Auth::user()->id,
+//            'name' => Auth::user()->name,
+//        ];
 //    }
 //});
+
+Broadcast::channel('{game}.party.{id}', function() {
+    Log::info(request()->user());
+
+    return [
+        'id' => 1,
+        'name' => 'test',
+    ];
+
+
+    if (! Auth::check()) {
+        return false;
+    }
+
+    return Auth::user();
+});
+
+Broadcast::channel('test', function(User $user) {
+    return request()->user()->id;
+});
+
+//Broadcast::channel('*', function() {
+//    return true;
+//});
+

@@ -20,6 +20,7 @@ class UserRepo
     protected $indexes = [
         'email',
         'remember_token',
+        'api_token'
     ];
 
     /**
@@ -41,6 +42,34 @@ class UserRepo
         return $users;
     }
 
+    public function get($email) {
+        $user_id = Redis::get($this->key . '_email:' . $email);
+        if (empty($user_id)) {
+            return null;
+        }
+        $user = Redis::get($this->key . ':' . $user_id);
+        if (empty($user)) {
+            return null;
+        }
+        return new User((array) json_decode($user));
+    }
+
+    public function getBy($key, $value) {
+        if (! in_array($key, $this->indexes)) {
+            return null;
+        }
+
+        $user_id = Redis::get($this->key . '_' . $key . ':' . $value);
+        if (empty($user_id)) {
+            return null;
+        }
+        $user = Redis::get($this->key . ':' . $user_id);
+        if (empty($user)) {
+            return null;
+        }
+        return new User((array) json_decode($user));
+    }
+
     /**
      * Create a new user
      *
@@ -51,10 +80,11 @@ class UserRepo
     {
         $data['id'] = Str::random('64');
         $data['remember_token'] = Str::random('64');
+        $data['api_token'] = Str::random('64');
 
         $user = new User($data);
         $key = $this->key . ':' . $user->id;
-        Redis::set($key, json_encode($user->toArray()));
+        Redis::set($key, json_encode($data));
         foreach ($this->indexes as $index) {
             Redis::set($this->key . '_' . $index . ':' . $user->{$index}, $user->id);
         }

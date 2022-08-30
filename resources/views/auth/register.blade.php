@@ -7,10 +7,10 @@
                 <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">Create an account</h2>
                 <p class="mt-2 text-center text-sm text-gray-600">
                     Already have an account?
-                    <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500"> Login here. </a>
+                    <a href="{{ route('auth.login') }}" class="font-medium text-indigo-600 hover:text-indigo-500"> Login here. </a>
                 </p>
             </div>
-            <form class="mt-8 space-y-6" action="/register" method="POST">
+            <form class="mt-8 space-y-6" action="{{ route('auth.postRegister') }}" method="POST">
                 @csrf
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>

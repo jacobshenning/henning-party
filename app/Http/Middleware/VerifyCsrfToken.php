@@ -12,6 +12,9 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+//        'socket.io/*',
+        'broadcasting',
+        'broadcasting/*',
+//        '*'
     ];
 }

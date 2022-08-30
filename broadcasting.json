@@ -1,0 +1,35 @@
+{
+    "debug": true,
+    "port": 6001,
+    "appManager.array.apps": [
+        {
+            "id": "1",
+            "key": "1",
+            "secret": "1",
+            "SOKETI_DB_REDIS_HOST": "127.0.0.1",
+            "SOKETI_DB_REDIS_PORT": 6379
+
+
+
+        }
+    ],
+    "queue": {
+        "driver": "redis",
+        "redis": {
+
+            "redisOptions": {
+                "host": "127.0.0.1",
+                "port": 6379,
+                "db": 0,
+                "password": null
+
+            }
+        }
+    },
+    "redis": {
+        "redisOptions": {
+            "host": "127.0.0.1",
+            "port": 6379
+    }
+    }
+}

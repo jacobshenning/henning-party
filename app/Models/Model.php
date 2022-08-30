@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Model {
+class Model extends \Illuminate\Database\Eloquent\Model {
 
     protected $attributes = [];
 
@@ -20,7 +20,16 @@ class Model {
 
     public function toArray(): array
     {
-        return $this->attributes;
+        $result = [];
+
+        foreach($this->attributes as $key => $value) {
+            if (! in_array($key, $this->hidden)) {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
     }
+
 
 }

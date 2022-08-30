@@ -17,4 +17,59 @@ class User extends Model implements
     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
+
+    /**
+     * @return string
+     */
+    public function getAuthIdentifierName(): string
+    {
+        return 'id';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthIdentifier(): mixed
+    {
+        $identifier = $this->getAuthIdentifierName();
+
+        return $this->$identifier;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAuthPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getRememberToken(): mixed
+    {
+        $remember_token_name = $this->getRememberTokenName();
+
+        return $this->$remember_token_name;
+    }
+
+    /**
+     * @param $value
+     * @return void
+     */
+    public function setRememberToken($value): void
+    {
+        $remember_token_name = $this->getRememberTokenName();
+
+        $this->$remember_token_name = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRememberTokenName(): string
+    {
+        return 'remember_token';
+    }
 }

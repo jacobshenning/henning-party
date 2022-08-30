@@ -1,5 +1,5 @@
 {
-    "authHost": "https://henning-party.test/",
+    "authHost": "https://henning-party.test",
     "authEndpoint": "/broadcasting/auth",
     "clients": [
         {
@@ -21,7 +21,7 @@
     "socketio": {
         "cors": {
             "origin": "*",
-            "methods": ["GET", "POST"],
+            "methods": ["GET", "POST", "HEAD"],
             "allowedHeaders": ["Origin", "Content-Type", "X-Auth-Token", "X-Requested-With", "Accept", "Authorization", "X-CSRF-TOKEN", "X-Socket-Id"],
             "credentials": true
         }
@@ -32,7 +32,7 @@
     "sslCertChainPath": "",
     "sslPassphrase": "",
     "subscribers": {
-        "http": false,
+        "http": true,
         "redis": true
     },
     "apiOriginAllow": {

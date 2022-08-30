@@ -2,7 +2,7 @@
 
 namespace App\Auth;
 
-use Illuminate\Auth\GenericUser;
+use App\Auth\User as GenericUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Support\Facades\Redis;

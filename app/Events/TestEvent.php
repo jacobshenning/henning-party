@@ -33,7 +33,7 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel|array
     {
-        return new Channel('test');
+        return new PresenceChannel('game.party.id');
     }
 
     public function broadcastAs(): string

@@ -19,7 +19,7 @@
         "@soketi/soketi": "^1.3.0",
         "@tailwindcss/forms": "^0.5.2",
         "alpinejs": "^3.10.3",
-        "laravel-echo-server-updated": "^1.6.5",
-        "socket.io-client": "^4.5.1"
+        "socket.io": "3.1.2",
+        "socket.io-client": "3.1.3"
     }
 }

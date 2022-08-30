@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Henning.PARTY</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @auth
+        <meta name="api-token" content="{{ Auth::user()->api_token }}">
+    @endauth
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -23,11 +27,11 @@
 
         <div class="ml-auto">
             @auth
-                <a href="/logout">Logout</a>
+                <a href="{{ route('auth.logout') }}">Logout</a>
             @endauth
 
             @guest
-                <a href="/login">Login</a>
+                <a href="{{ route('auth.login') }}">Login</a>
             @endguest
         </div>
     </div>
